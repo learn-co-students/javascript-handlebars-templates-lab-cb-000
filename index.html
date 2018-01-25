@@ -21,13 +21,28 @@
       <form onSubmit="createRecipe(); return false">
         Name: <input type="text" name="name"><br>
         Description: <input type="text" name="description"><br>
-        Ingredient 1: <input type="text" name="name_1"> <input type="text" name="quantity_1"><br>
-        Ingredient 2: <input type="text" name="name_2"> <input type="text" name="quantity_2"><br>
-        Ingredient 3: <input type="text" name="name_3"> <input type="text" name="quantity_3"><br>
-        Ingredient 4: <input type="text" name="name_4"> <input type="text" name="quantity_4"><br>
-        Ingredient 5: <input type="text" name="name_5"> <input type="text" name="quantity_5"><br>
+        <h3>Ingredients</h3>
+        {{#each ingredients}}
+          <input type="text" name="ingredients" value="{{name}}">
+        {{/each}}
         <input type="submit">
       </form>
+    </script>
+    <script id="recipe-template" type="text/x-handlebars-template">
+      <div id="recipe">
+        <p>{{name}}</p>
+        <a href="">Edit Recipe</a>
+        {{> recipeDetailsPartial }}
+      </div>
+    </script>
+    <script id="recipe-details-template" type="text/x-handlebars-template">
+      <p>{{ description }}</p>
+      <h3>Ingredients:</h3>
+      <ul>
+        {{#each ingredients}}
+          {{ displayIngredient }}
+        {{/each}}
+      </ul>
     </script>
   </body>
 </html>
