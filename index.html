@@ -8,33 +8,46 @@
   </head>
   <body>
     <main id="main">
+      <a href="#" onclick="displayForm();return false;">Create New Recipe</a>
     </main>
-    <script id="my-template" type="text/x-handlebars-template">
+
+    <script id="recipe-form-template" type="text/x-handlebars-template">
+      <h3>Recipe</h3>
+      <form id="recipe-form" onsubmit="createRecipe(); return false;">
+        Name: <input type="text" id="name"><br><br>
+        Description: <input type="text" id="description"><br><br>
+        Ingredients: <br><br>
+        <input type="text" name="ingredients"><br><br>
+        <input type="text" name="ingredients"><br><br>
+        <input type="text" name="ingredients"><br><br>
+        <input type="text" name="ingredients"><br><br>
+        <input type="text" name="ingredients"><br><br>
+        <input type="submit" value="Create Recipe"><br><br>
+      </form>
+    </script>
+
+    <script id="recipe-template" type="text/x-handlebars-template">
+      <h3 id="recipe-name"> {{name}}</h3>
+      {{> recipeDetailsPartial }}
+      <a href="#" onclick="displayEditForm();return false;">Edit Recipe</a>
+    </script>
+
+    <script id="recipe-details-partial" type="text/x-handlebars-template">
       <div id="recipe">
         <p>{{description}}</p>
         <ul>
           {{#each ingredients}}
-          <li>{{name}}</li>
+            <li>{{displayIngredient}}</li>
           {{/each}}
         </ul>
       </div>
     </script>
 
-    <script id="recipe-form-template" type="text/x-handlebars-template">
-      <form onsubmit="createRecipe(); return false;">
-        Name: <input type="text" id="name">
-        Description: <input type="text" id="description">
-        <input type="submit" value="Create Recipe">
-      </form>
+    <script id="recipe-form-partial" type="text/x-handlebars-template">
+
     </script>
 
-    <script id="recipe-template" type="text/x-handlebars-template">
-      <h3> {{name}}</h3>
-      {{> recipeDetailsPartial }}
-      <a href="#">Edit Recipe</a>
-    </script>
-
-    <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script src="index.js"></script>
     <!-- Open this file and call `mocha.run()` in console to run tests -->
     <div id="mocha"></div>
