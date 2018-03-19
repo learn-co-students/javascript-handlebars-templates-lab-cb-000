@@ -49,25 +49,20 @@ function createRecipe() {
 }
 
 function displayEditForm() {
+
   var name = document.getElementById("recipe-name").value;
   var description = document.getElementsByTagName("p")[0].value;
-  var ingredients = document.getElementsByTagName("li")
+  var ingredientsList = document.getElementsByTagName("li")
 
-  var recipe = {
-    name: name,
-    description: description,
-    ingredients: [
-      ingredients[0].value,
-      ingredients[1].value,
-      ingredients[2].value,
-      ingredients[3].value,
-      ingredients[4].value
-    ]
+  var ingredients = []
+  for(var i=0;i<ingredientsList.length;i++) {
+    ingredients.push(ingredientsList[i].value)
   }
 
-  var recipeFormtemplate = Handlebars.compile(document.getElementById("recipe-form-template").innerHTML);
-  var recipeFormhtml = recipeFormtemplate(recipe);
-  document.getElementsByTagName("main")[0].innerHTML += recipeFormhtml;
+  var recipe = {name, description, ingredients}
+
+  var recipeFormTemplate = Handlebars.compile(document.getElementById("recipe-form-template").innerHTML);
+    document.getElementsByTagName("main")[0].innerHTML += recipeFormTemplate(recipe);
 }
 
 
