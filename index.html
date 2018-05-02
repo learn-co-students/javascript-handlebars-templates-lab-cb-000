@@ -5,11 +5,63 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="node_modules/mocha/mocha.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <body>
-    <main id="main">
+    <main id="main" class="container">
+      <div id="centeredDiv" class="d-flex justify-content-center">
+
+      </div>
+
+      <div id="end-process-message"></div>
+      <div class="container">
+        <div class="row">
+          <div id="recipeTemplateDiv" class="col-sm"></div>
+          <div id="editRecipeForm" class="col-sm"></div>
+        </div>
+      </div>
     </main>
+    <script id="recipe-template" type="text/x-handlebars-template">
+      Name: {{name}} | <a href="#" onclick="displayEditForm()">Edit Recipe</a><br>
+      {{> recipeDetailsPartial }}
+    </script>
+    <script id="recipe-details-partial" type="text/x-handlebars-template">
+        Description: {{description}}<br>
+        <ul>
+          {{#each ingredients}}
+            {{displayIngredient this}}
+          {{/each}}
+        </ul>
+    </script>
+    <script id="recipe-form-template" type="text/x-handlebars-template">
+      <fieldset class="form-group">
+        <legend>Insert a New Recipe: </legend>
+        <form id="recipe-form" onsubmit="createRecipe();return false;">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name">
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" rows="3" id="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="ingredients">Ingredients:</label>
+            <input type="text" class="form-control" id="ingredients" name="ingredients">
+            <input type="text" class="form-control" id="ingredients" name="ingredients">
+            <input type="text" class="form-control" id="ingredients" name="ingredients">
+            <input type="text" class="form-control" id="ingredients" name="ingredients">
+            <input type="text" class="form-control" id="ingredients" name="ingredients">
+          </div>
+          <input type="submit" value="Create Recipe" class="btn btn-default">
+        </form>
+    </fieldset>
+    </script>
+    <script id="recipe-form-partial" type="text/x-handlebars-template">
+
+    </script>
     <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script src="index.js"></script>
     <!-- Open this file and call `mocha.run()` in console to run tests -->
     <div id="mocha"></div>
