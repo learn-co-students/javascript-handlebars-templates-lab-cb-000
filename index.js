@@ -1,13 +1,6 @@
-// Loads every time page is remapped
-/*
-alert("inside javascript - loading first page")
-var template = Handlebars.compile(document.getElementById("recipe-form").innerHTML);
-
-//now run the template - this template takes no input.
-var html = template();
-
-document.getElementsByTagName("main")[0].innerHTML = html;
-*/
+//NOTE:
+//I bailed on the last part of this lab:
+//	1. Refactor your forms so that recipe-form and the edit form template are both constructed with the same recipe-form-template. The template should render with the recipe data for edit, and with empty values for a new recipe. Hint: Don't forget you can pass any object with any properties as the context for your templates, including, for instance, values for onsubmit.
 
 function init() {
   //put any page initialization/handlebars
