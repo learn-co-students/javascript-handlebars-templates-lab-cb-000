@@ -5,17 +5,121 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="node_modules/mocha/mocha.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
+    <h1>Recipes</h1>
     <main id="main">
-    </main>
+        <form onsubmit="createRecipe();">
+            Name:<input id="recipeName" type="text" onkeyup='saveValue(this);'>
+            <br>Description:<br> 
+            <textarea id="description" name="description" cols="80" rows="5"></textarea><br>
+            Ingredients: <br>
+            <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+            <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+            <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+            <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+            <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+            <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+            <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>    
+            <input type="submit"  id="btn" value="Save recipe">
+          </form>
+    </main> 
+
+    <script id="recipe-form-template" type="text/x-handlebars-template">
+      <form onsubmit="updateRecipe();">
+        Name: <input type="text" id="recipeName" type="text" value={{name}}></input-id>
+        <br>Description: <br>
+        <textarea id="description" name="description" onkeyup='saveValue(this);' cols="80" rows="5" value={{description}}></textarea>
+        Ingredients: <br>
+        <ul>
+          {{#each}}
+            <li><input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1" value={{ingredient}}></li>
+          {{/each}}
+        </ul>
+      </form>
+    </script>
+      
+    <script id="recipe-form" type="text/x-handlebars-template">
+      <form onsubmit="createRecipe()">
+        Name:<input id="recipeName" type="text">
+        Description:<br> 
+        <textarea id="description" name="description" cols="80" rows="5"></textarea><br>
+        Ingredients: <br>
+        <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+        <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+        <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+        <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+        <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+        <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>
+        <input type=text class="ingredient" onkeyup='saveValue(this);' cols="40" rows="1"><br>    
+        <input type="submit"  id="btn" value="Save recipe">
+      </form>
+    </script>
+
+    <script id="recipe-template" type="text/x-handlebars-template">
+      <div id="completeRecipe">
+        <br><br><a href="#" onclick="displayEditForm();">Edit Recipe</a>
+        <header> Recipe Name: <span id="recipeName">{{name}}</span></header>
+        {{>recipeDetailsPartial}}
+      </div>
+    </script>
+
+    <script id="recipe-details-partial" type="text/x-handlebars-template">
+      <p>Description: <span id="description">{{description}}</span> </p>
+      <p>Ingredients:</p>
+        <ul>
+          {{#each ingredients}}
+            <li class="ingredient">{{displayIngredient this}}</li> 
+          {{/each}}
+        </ul>
+    </script>
+
+    <!-- helper function -->
+    <script id="helperFunctionName" type="text/x-handlebars-template">
+      <ul>
+        {{#each this}}
+            <!-- do something with the data -->
+            <p>{{ingredient}}</p>
+            {{#if ingredients_count}}
+              <p>{{ingredient}}</p>{}
+            {{else}}
+              <p>No ingredients yet.</p>
+            {{/if}}
+        {{/each}}
+      </ul>
+    </script>
+
+
+    <script id="sampleifAndForEach-template" type="text/x-handlebars-template">
+      <form onsubmit="createRecipe"></form>
+
+        <article>
+          <header><h3>Recipe Name: {{name}}</h3></header>
+          <p>{{description}}</p>
+          {{#each this}}
+            <p>{{ingredient}}</p>
+              {{#if ingredient_count}}
+                <p> Ingredient</p>
+              {{else}}
+                <p>No Ingredients Yet</p>
+              {{/if}}
+          {{/each}}
+        </article>
+
+      </form>
+    </script>
+
+
     <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
     <script src="index.js"></script>
-    <!-- Open this file and call `mocha.run()` in console to run tests -->
+
+    <!-- Open this file and call `mocha.run()` in console to run tests --> 
     <div id="mocha"></div>
     <script src="node_modules/mocha/mocha.js"></script>
     <script src="node_modules/expect/umd/expect.min.js"></script>
     <script>mocha.setup('bdd');</script>
     <script src="test/index-test.js"></script>
+  
   </body>
 </html>
